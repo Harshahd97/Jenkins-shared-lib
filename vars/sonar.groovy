@@ -1,15 +1,8 @@
-def call() {
-    stage('SonarQube Analysis') {
-        script {
-            // Configure SonarQube properties
-            def sonarProperties = [
-                '-Dsonar.projectKey=sonar-token',
-                '-Dsonar.sources=.',
-                // Add more SonarQube properties as needed
-            ].join(' ')
+#!/usr/bin/env groovy
 
-            // Run SonarQube analysis
-            sh "mvn sonar:sonar ${sonarProperties}"
-        }
-    }
-}
+   def runSonarQubeScan() {
+       // Your SonarQube scan steps go here
+       sh 'mvn sonar:sonar -Dsonar.projectKey=sonartoken -Dsonar.host.url=http://3.84.2.147:9000'
+   }
+
+   return this
