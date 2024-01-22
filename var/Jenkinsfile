@@ -1,0 +1,27 @@
+@Library('library-demo') _
+
+
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    sh("""
+                       rm -rf weather-update
+                       git clone https://github.com/Harshahd97/weather-update.git
+                       ls -ltr
+                    """)
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    build 'install'
+                }
+            }
+        }
+    }
+}
