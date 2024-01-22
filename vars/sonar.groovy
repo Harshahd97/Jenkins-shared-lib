@@ -1,6 +1,15 @@
-def call(credentialsId){
+def call() {
+    stage('SonarQube Analysis') {
+        script {
+            // Configure SonarQube properties
+            def sonarProperties = [
+                '-Dsonar.projectKey=sonar-token',
+                '-Dsonar.sources=.',
+                // Add more SonarQube properties as needed
+            ].join(' ')
 
-    withSonarQubeEnv(credentialsId: sonar-token) {
-         sh 'mvn clean package sonar:sonar'
+            // Run SonarQube analysis
+            sh "mvn sonar:sonar ${sonarProperties}"
+        }
     }
 }
